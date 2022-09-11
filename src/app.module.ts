@@ -6,6 +6,7 @@ import { TerminusModule } from '@nestjs/terminus';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { HealthController } from './app/health.controller';
+import { QueueModule } from './queue';
 
 @Module({
   imports: [
@@ -25,6 +26,7 @@ import { HealthController } from './app/health.controller';
     }),
     TerminusModule,
     HttpModule,
+    QueueModule,
   ],
   controllers: [AppController, HealthController],
   providers: [AppService],
