@@ -30,4 +30,21 @@ export class PrimeService {
     }
     return primeFactors;
   }
+
+  getDistinctPrimeFactors(products: number[]): {
+    primeFactors: number[];
+    count: number;
+  } {
+    const factorSet = new Set<number>();
+
+    for (const product of products) {
+      const factors = this.getPrimeFactors(product);
+      for (const factor of factors) {
+        factorSet.add(factor);
+      }
+    }
+
+    const primeFactors = Array.from(factorSet);
+    return { primeFactors, count: primeFactors.length };
+  }
 }

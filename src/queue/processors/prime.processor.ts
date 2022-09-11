@@ -13,8 +13,15 @@ export class PrimeProcessor {
   }
 
   @Process('distinct-prime-factors')
-  findDistinctPrimeFactors({ data }: Job<{ input: number }>): void {
-    const primeFactors = this.primeService.getPrimeFactors(data.input);
-    console.log(`${new Date()} - All prime factors`, primeFactors);
+  findDistinctPrimeFactors({ data }: Job<{ products: number[] }>): void {
+    const { primeFactors, count } = this.primeService.getDistinctPrimeFactors(
+      data.products,
+    );
+    console.log(
+      `${new Date()} - Distinct prime factors`,
+      primeFactors,
+      'count:',
+      count,
+    );
   }
 }
