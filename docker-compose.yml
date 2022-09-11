@@ -12,24 +12,24 @@ services:
     networks:
       - terminus
 
-  api:
-    container_name: api
-    build:
-      context: .
-      dockerfile: ./dev.Dockerfile
-      target: development
-    volumes:
-      - ./:/app
-      - /app/node_modules
-    depends_on:
-      - redis
-    env_file:
-      - ./.env
-    ports:
-      - "3000:3000"  
-    networks:
-      - terminus
-    command: npm run start:dev
+  # api:
+  #   container_name: api
+  #   build:
+  #     context: .
+  #     dockerfile: ./dev.Dockerfile
+  #     target: development
+  #   volumes:
+  #     - ./:/app
+  #     - /app/node_modules
+  #   depends_on:
+  #     - redis
+  #   env_file:
+  #     - ./.env
+  #   ports:
+  #     - "3000:3000"  
+  #   networks:
+  #     - terminus
+  #   command: npm run start:dev
 
 volumes:
   cache:

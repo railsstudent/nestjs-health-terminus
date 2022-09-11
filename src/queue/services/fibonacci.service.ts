@@ -2,33 +2,37 @@ import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class FibonacciService {
-  fibonacci(order: number): number {
-    if (order <= 0) {
-      return 0;
-    }
-    if (order === 1) {
-      return 1;
+  fibonacci(order: number): number[] {
+    if (order < 0) {
+      return [];
     }
 
+    if (order === 0) {
+      return [0];
+    }
+
+    if (order === 1) {
+      return [0, 1];
+    }
+
+    const accumulators: number[] = [0, 1];
     const initFibonacciOrder = 2;
-    return this.fibonacciAccumulator(order - initFibonacciOrder, 0, 1);
+    return this.fibonacciAccumulator(order - initFibonacciOrder, accumulators);
   }
 
   private fibonacciAccumulator(
     order: number,
-    firstPrev: number,
-    secondPrev: number,
-  ): number {
+    accumulators: number[],
+  ): number[] {
+    const secondLastFib = accumulators[accumulators.length - 2];
+    const lastFib = accumulators[accumulators.length - 1];
+
+    const nextFibonacci = secondLastFib + lastFib;
+    const extendedAccumulators = [...accumulators, nextFibonacci];
     if (order === 0) {
-      return firstPrev + secondPrev;
+      return extendedAccumulators;
     }
 
-    const nextFibonacci = firstPrev + secondPrev;
-    return this.fibonacciAccumulator(order - 1, secondPrev, nextFibonacci);
-  }
-
-  fibonacciCubeGraph(order: number): number {
-    const cubeOrder = 2;
-    return this.fibonacci(order + cubeOrder);
+    return this.fibonacciAccumulator(order - 1, extendedAccumulators);
   }
 }
