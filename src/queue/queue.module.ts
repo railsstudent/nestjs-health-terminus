@@ -1,6 +1,6 @@
 import { BullModule } from '@nestjs/bull';
 import { Module } from '@nestjs/common';
-import { FibonacciService } from './services';
+import { FibonacciService, PrimeService } from './services';
 import { QueueController } from './controllers';
 import { PrimeProcessor, FibonacciProcessor } from './processors';
 
@@ -13,7 +13,12 @@ import { PrimeProcessor, FibonacciProcessor } from './processors';
       name: 'prime',
     }),
   ],
-  providers: [FibonacciService, FibonacciProcessor, PrimeProcessor],
+  providers: [
+    FibonacciService,
+    FibonacciProcessor,
+    PrimeProcessor,
+    PrimeService,
+  ],
   controllers: [QueueController],
 })
 export class QueueModule {}
