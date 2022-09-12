@@ -37,8 +37,12 @@ export class QueueController {
       `${new Date()} - Distinct prime factor job submitted to prime queue`,
       arrayDto.products,
     );
-    await this.primeQueue.add('distinct-prime-factors', {
-      products: arrayDto.products,
-    });
+    await this.primeQueue.add(
+      'distinct-prime-factors',
+      {
+        products: arrayDto.products,
+      },
+      { delay: 2000 },
+    );
   }
 }

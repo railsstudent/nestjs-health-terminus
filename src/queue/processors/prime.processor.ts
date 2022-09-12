@@ -1,4 +1,9 @@
-import { Process, Processor } from '@nestjs/bull';
+import {
+  OnQueueActive,
+  OnQueueCompleted,
+  Process,
+  Processor,
+} from '@nestjs/bull';
 import { Job } from 'bull';
 import { PrimeService } from '../services';
 
@@ -22,6 +27,26 @@ export class PrimeProcessor {
       primeFactors,
       'count:',
       count,
+    );
+  }
+
+  @OnQueueActive()
+  onJobActive(job: Job) {
+    console.log(
+      `onJobActive - id: ${job.id}, name: ${job.name}, data: `,
+      job.data,
+      ` starts at ${new Date(job.timestamp)}`,
+    );
+  }
+
+  @OnQueueCompleted()
+  onJobSuccess(job: Job, result: any) {
+    console.log(
+      `onJobSuccess - id: ${job.id}, name: ${job.name}, data: `,
+      job.data,
+      ` completes at ${new Date(job.finishedOn)}`,
+      'result',
+      result,
     );
   }
 }
