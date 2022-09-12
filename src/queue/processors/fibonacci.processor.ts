@@ -1,4 +1,3 @@
-// import { FibonacciService } from '@/queue';
 import { Process, Processor } from '@nestjs/bull';
 import { Job } from 'bull';
 import { FibonacciService } from '../services';
