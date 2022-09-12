@@ -33,7 +33,6 @@ services:
 
 volumes:
   cache:
-  node_modules:
 
 networks:
   terminus:
