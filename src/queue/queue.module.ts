@@ -13,12 +13,7 @@ import { PrimeProcessor, FibonacciProcessor } from './processors';
       name: 'prime',
     }),
   ],
-  providers: [
-    FibonacciService,
-    FibonacciProcessor,
-    PrimeProcessor,
-    PrimeService,
-  ],
+  providers: [FibonacciService, FibonacciProcessor, PrimeProcessor, PrimeService],
   controllers: [QueueController],
 })
 export class QueueModule {}

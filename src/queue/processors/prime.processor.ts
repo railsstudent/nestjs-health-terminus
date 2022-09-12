@@ -1,9 +1,4 @@
-import {
-  OnQueueActive,
-  OnQueueCompleted,
-  Process,
-  Processor,
-} from '@nestjs/bull';
+import { OnQueueActive, OnQueueCompleted, Process, Processor } from '@nestjs/bull';
 import { Job } from 'bull';
 import { PrimeService } from '../services';
 
@@ -19,15 +14,8 @@ export class PrimeProcessor {
 
   @Process('distinct-prime-factors')
   findDistinctPrimeFactors({ data }: Job<{ products: number[] }>): void {
-    const { primeFactors, count } = this.primeService.getDistinctPrimeFactors(
-      data.products,
-    );
-    console.log(
-      `${new Date()} - Distinct prime factors`,
-      primeFactors,
-      'count:',
-      count,
-    );
+    const { primeFactors, count } = this.primeService.getDistinctPrimeFactors(data.products);
+    console.log(`${new Date()} - Distinct prime factors`, primeFactors, 'count:', count);
   }
 
   @OnQueueActive()

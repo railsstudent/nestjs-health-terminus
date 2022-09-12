@@ -20,10 +20,7 @@ export class FibonacciService {
     return this.fibonacciAccumulator(order - initFibonacciOrder, accumulators);
   }
 
-  private fibonacciAccumulator(
-    order: number,
-    accumulators: number[],
-  ): number[] {
+  private fibonacciAccumulator(order: number, accumulators: number[]): number[] {
     const secondLastFib = accumulators[accumulators.length - 2];
     const lastFib = accumulators[accumulators.length - 1];
 
