@@ -1,12 +1,10 @@
-import { HttpModule } from '@nestjs/axios';
 import { BullModule } from '@nestjs/bull';
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { TerminusModule } from '@nestjs/terminus';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { HealthController } from './app/health.controller';
 import { QueueModule } from './queue';
+import { HealthModule } from './health';
 
 @Module({
   imports: [
@@ -22,11 +20,10 @@ import { QueueModule } from './queue';
         },
       }),
     }),
-    TerminusModule,
-    HttpModule,
     QueueModule,
+    HealthModule,
   ],
-  controllers: [AppController, HealthController],
+  controllers: [AppController],
   providers: [AppService],
 })
 export class AppModule {}
