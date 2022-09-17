@@ -25,12 +25,7 @@ export class QueueController {
   @Post('distinct-prime-factors')
   async getDistinctPrimeFactors(@Body() arrayDto: ArrayProductsDto): Promise<void> {
     console.log(`${new Date()} - Distinct prime factor job submitted to prime queue`, arrayDto.products);
-    await this.primeQueue.add(
-      'distinct-prime-factors',
-      {
-        products: arrayDto.products,
-      },
-      { delay: 2000 },
-    );
+    const { products } = arrayDto;
+    await this.primeQueue.add('distinct-prime-factors', { products }, { delay: 2000 });
   }
 }
