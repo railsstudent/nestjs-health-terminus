@@ -1,7 +1,7 @@
 import { getQueueToken } from '@nestjs/bull';
 import { Injectable } from '@nestjs/common';
 import { ModuleRef } from '@nestjs/core';
-import { HealthIndicator, HealthIndicatorResult } from '@nestjs/terminus';
+import { HealthIndicator, HealthIndicatorResult, HealthCheckError } from '@nestjs/terminus';
 import { Queue } from 'bull';
 
 export interface Dog {
@@ -20,7 +20,7 @@ export class BullQueueHealthIndicator extends HealthIndicator {
     const errorResults = this.filterErrors(promiseResults);
 
     if (errorResults.length) {
-      return this.getStatus('bull', false, { errors: errorResults });
+      throw new HealthCheckError('Bull queue failed', this.getStatus('bull', false, { errors: errorResults }));
     }
 
     return this.getStatus('bull', true);
