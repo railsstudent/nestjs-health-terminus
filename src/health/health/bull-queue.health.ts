@@ -4,11 +4,6 @@ import { ModuleRef } from '@nestjs/core';
 import { HealthIndicator, HealthIndicatorResult, HealthCheckError } from '@nestjs/terminus';
 import { Queue } from 'bull';
 
-export interface Dog {
-  name: string;
-  type: string;
-}
-
 @Injectable()
 export class BullQueueHealthIndicator extends HealthIndicator {
   constructor(private moduleRef: ModuleRef) {
@@ -47,7 +42,7 @@ export class BullQueueHealthIndicator extends HealthIndicator {
         const queue = await (queueToken as Queue).isReady();
         const isEveryClientReady = queue.clients.every((client) => client.status === 'ready');
         if (!isEveryClientReady) {
-          throw new Error(`${name} - some redis client are not ready`);
+          throw new Error(`${name} - some redis clients are not ready`);
         }
         return true;
       }
