@@ -8,6 +8,7 @@ export const healthConfig = HealthModule.forRootAsync({
     return {
       app: 'nestjs-health-terminus',
       backendUrl: configService.get<string>('BACKEND_DOMAIN', ''),
+      shouldCheckDatabase: true,
       queueNames: ['fibonacci', 'prime'],
       redisOptions: {
         host: configService.get<string>('REDIS_HOST', 'localhost'),

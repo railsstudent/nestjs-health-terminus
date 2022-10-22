@@ -4,7 +4,7 @@ import { HttpModule } from '@nestjs/axios';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { QueueModule } from './queue';
-import { bullConfig, healthConfig } from './configs';
+import { bullConfig, healthConfig, typeOrmConfig } from './configs';
 
 @Module({
   imports: [
@@ -13,6 +13,7 @@ import { bullConfig, healthConfig } from './configs';
     }),
     bullConfig,
     healthConfig,
+    typeOrmConfig,
     QueueModule,
     HttpModule,
   ],

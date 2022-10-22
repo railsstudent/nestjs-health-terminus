@@ -12,27 +12,34 @@ services:
     networks:
       - terminus
 
-  # api:
-  #   container_name: api
-  #   build:
-  #     context: .
-  #     dockerfile: ./dev.Dockerfile
-  #     target: development
-  #   volumes:
-  #     - ./:/app
-  #     - /app/node_modules
-  #   depends_on:
-  #     - redis
-  #   env_file:
-  #     - ./.env
-  #   ports:
-  #     - "3000:3000"  
-  #   networks:
-  #     - terminus
-  #   command: npm run start:dev
+  postgres:
+    container_name: postgres
+    image: postgres:14.5
+    restart: always
+    ports:
+      - '${DATABASE_PORT}:${DATABASE_PORT}'
+    environment:
+      - POSTGRES_USER=${DATABASE_USER}
+      - POSTGRES_PASSWORD=${DATABASE_PASSWORD}
+      - POSTGRES_DB=${DATABASE_NAME}
+      - PGDATA=/var/lib/postgresql/data
+    volumes: 
+      - db:/var/lib/postgresql/data
+    networks:
+      - terminus
+
+  adminer:
+    container_name: adminer
+    image: adminer:latest
+    restart: always
+    ports:
+      - "8080:8080"
+    networks:
+      - terminus
 
 volumes:
   cache:
+  db:
 
 networks:
   terminus:
